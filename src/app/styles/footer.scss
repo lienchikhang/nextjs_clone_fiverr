@@ -1,13 +1,17 @@
 footer {
     @apply mx-8 pt-16;
+
+    .footer__responsive {
+        @apply block sm:hidden
+    }
     
     .footer__top {
         
-        @apply  grid grid-cols-10 pb-4;
+        @apply  hidden sm:grid sm:grid-cols-9 lg:grid-cols-10 pb-4 gap-10;
         border-bottom: 1px solid #e4e5e7;
 
         .footer__item {
-            @apply col-span-2;
+            @apply sm:col-span-3 lg:col-span-2;
     
             .item__heading {
                 @apply text-base font-semibold mb-4;
@@ -26,10 +30,10 @@ footer {
     }
 
     .footer__bottom {
-        @apply py-6 flex items-center justify-between;
+        @apply flex-col md:flex-row py-6 flex items-center justify-between gap-5;
 
         .left {
-            @apply flex items-center;
+            @apply flex-col md:flex-row flex items-center gap-5;
 
             svg {
                 @apply mr-4;

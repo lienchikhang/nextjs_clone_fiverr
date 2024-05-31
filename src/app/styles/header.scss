@@ -5,8 +5,18 @@ header {
     border-bottom: 1px solid #e4e5e7;
 
     .header__logo {
+        @apply flex sm:flex-1 items-center;
 
+        
     }
+    
+    .header__menu {
+        @apply block px-2 sm:px-0 lg:hidden mr-3;
+    }
+    .modal__button {
+        @apply text-white bg-black rounded-md px-4 py-3;
+    }
+
 
     .header__nav {
         @apply flex items-center;
@@ -16,7 +26,7 @@ header {
         }
 
         .nav__item {
-            @apply px-5 py-4;
+            @apply hidden lg:block px-5 py-4;
 
             a {
                  @apply font-semibold transition-all;
@@ -27,8 +37,15 @@ header {
                 a, svg {
                     color: #5bbc7b;
                 }
+            }
 
-                
+            &:nth-child(5) {
+                @apply block px-1 sm:px-5;
+            }
+
+            &:last-child {
+                @apply hidden sm:block bg-transparent rounded-lg py-2 px-4 text-sm;
+                border: 2px solid #000;
             }
         }
     }

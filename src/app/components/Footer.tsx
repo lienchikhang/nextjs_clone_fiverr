@@ -4,6 +4,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import XIcon from "@mui/icons-material/X";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import ItemMenu from "./ItemMenu";
 
 const footers = [
   {
@@ -82,6 +83,13 @@ const footers = [
 const Footer = () => {
   return (
     <footer>
+      <div className="footer__responsive">
+        {footers.map((footer, idx) => {
+          return (
+            <ItemMenu key={idx} heading={footer.heading} items={footer.child} />
+          );
+        })}
+      </div>
       <div className="footer__top">
         {footers.map((footer, idx) => {
           return (

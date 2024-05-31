@@ -1,12 +1,72 @@
-import React from "react";
-import "../styles/header.scss";
+"use client";
+import React, { useState } from "react";
 import NavItem from "./NavItem";
 import LanguageIcon from "@mui/icons-material/Language";
 import NavItemSelect from "./NavItemSelect";
+import MenuIcon from "@mui/icons-material/Menu";
+import {
+  Box,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
+  SwipeableDrawer,
+} from "@mui/material";
+import "../styles/header.scss";
+import ItemMenu from "./ItemMenu";
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  console.log({ isOpen });
+
+  const toggleDrawer =
+    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event &&
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return;
+      }
+
+      setIsOpen(open);
+    };
+
+  const list = () => (
+    <Box sx={{ width: 300, padding: "24px" }} role="presentation">
+      <button className="modal__button text-white bg-black rounded-md px-7 py-2 font-semibold">
+        Join fiverr
+      </button>
+      <List>
+        <ItemMenu heading="Sign in" />
+        <ItemMenu heading="Browse Categories" />
+        <ItemMenu heading="Explore" />
+      </List>
+      <Divider />
+      <List
+        subheader={
+          <ListSubheader component="div" id="nested-list-subheader">
+            General
+          </ListSubheader>
+        }
+      >
+        <ItemMenu heading="Home" />
+        <ItemMenu heading="English" />
+        <ItemMenu heading="Explore" />
+      </List>
+    </Box>
+  );
+
   return (
     <header>
+      <div className="header__menu" onClick={() => setIsOpen(true)}>
+        <MenuIcon />
+      </div>
       <div className="header__logo">
         <svg
           width="89"
@@ -23,6 +83,14 @@ const Header = () => {
           </g>
         </svg>
       </div>
+      <SwipeableDrawer
+        anchor={"left"}
+        open={isOpen}
+        onClose={toggleDrawer(false)}
+        onOpen={toggleDrawer(true)}
+      >
+        {list()}
+      </SwipeableDrawer>
       <ul className="header__nav">
         <li className="nav__item">
           <NavItemSelect text="Fiverr Pro" link="/test" />
@@ -39,6 +107,9 @@ const Header = () => {
         </li>
         <li className="nav__item">
           <NavItem text="Sign in" link="/auth/login" />
+        </li>
+        <li className="nav__item">
+          <NavItem text="Join" link="/auth/login" />
         </li>
       </ul>
     </header>
