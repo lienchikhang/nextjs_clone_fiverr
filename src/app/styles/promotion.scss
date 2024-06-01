@@ -1,0 +1,38 @@
+.promotion {
+    @apply grid grid-cols-12 lg:gap-10 px-8 py-16;
+    background: #4936eb;
+
+    .promotion__info {
+        @apply col-span-12 mb-8 lg:col-span-6 lg:mb-0;
+
+        h2 {
+            @apply text-2xl lg:text-3xl font-bold mb-4 text-white;
+        }
+
+        .MuiTypography-root.MuiTypography-body1.MuiListItemText-primary.css-10hburv-MuiTypography-root {
+            @apply text-white font-semibold;
+        }
+
+        .MuiCollapse-root.MuiCollapse-vertical.MuiCollapse-entered.css-pwcg7p-MuiCollapse-root {
+            background: #4ea7f6;
+        }
+
+        svg {
+            @apply hidden;
+        }
+    }
+
+    .promotion__image {
+        @apply col-span-12 lg:col-span-6 relative;
+
+
+        img {
+            @apply object-cover w-full rounded-md h-full;
+
+            &:last-child {
+                @apply absolute top-1/2 -translate-y-1/2 object-cover h-[80%] lg:h-[400px] rounded-full;
+            }
+            
+        }
+    }
+}

@@ -1,26 +1,21 @@
 "use client";
-import {
-  Collapse,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import { Collapse, List, ListItemButton, ListItemText } from "@mui/material";
 import React, { useState } from "react";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SendIcon from "@mui/icons-material/Send";
+
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import NestedItemMenu from "./NestedItemMenu";
-import { StarBorder } from "@mui/icons-material";
 
 interface Props {
   heading: string;
   items?: string[];
+  isDefault?: boolean;
 }
 
-const ItemMenu: React.FC<Props> = ({ heading, items = null }) => {
+const ItemMenu: React.FC<Props> = ({
+  heading,
+  items = null,
+  isDefault = false,
+}) => {
   const [open, setOpen] = useState(false);
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -34,18 +29,33 @@ const ItemMenu: React.FC<Props> = ({ heading, items = null }) => {
         <ListItemText primary={heading} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          {items &&
-            items.map((item, idx) => {
-              return (
-                <ListItemButton key={idx} sx={{ pl: 4 }}>
-                  <ListItemText primary={item} />
-                </ListItemButton>
-              );
-            })}
-        </List>
-      </Collapse>
+      {!isDefault ? (
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {items &&
+              items.map((item, idx) => {
+                return (
+                  <ListItemButton key={idx} sx={{ pl: 4 }}>
+                    <ListItemText primary={item} />
+                  </ListItemButton>
+                );
+              })}
+          </List>
+        </Collapse>
+      ) : (
+        <Collapse in={true} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {items &&
+              items.map((item, idx) => {
+                return (
+                  <ListItemButton key={idx} sx={{ pl: 4 }}>
+                    <ListItemText primary={item} />
+                  </ListItemButton>
+                );
+              })}
+          </List>
+        </Collapse>
+      )}
     </React.Fragment>
   );
 };

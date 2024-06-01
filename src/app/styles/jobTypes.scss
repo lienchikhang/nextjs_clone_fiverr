@@ -1,0 +1,13 @@
+.jobTypes {
+    @apply px-8 py-16;
+
+    .jobTypes__list {
+        @apply grid grid-cols-10 gap-10;
+
+        .jobTypes__item {
+            @apply col-span-2;
+        }
+    }
+
+
+}
