@@ -40,9 +40,6 @@ const ItemMenu: React.FC<Props> = ({ heading, items = null }) => {
             items.map((item, idx) => {
               return (
                 <ListItemButton key={idx} sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
                   <ListItemText primary={item} />
                 </ListItemButton>
               );
