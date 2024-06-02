@@ -22,7 +22,7 @@
                             @apply h-full;
 
                             .my-slide {
-                                @apply p-8 grid grid-cols-12 gap-10;
+                                @apply p-24 grid grid-cols-12 gap-10;
 
                                 div {
                                     @apply col-span-12 lg:col-span-6

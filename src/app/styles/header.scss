@@ -1,51 +1,79 @@
 header {
 
-    @apply flex justify-between items-center px-8 py-2;
+    @apply fixed top-0 left-0 right-0 px-8 py-2 z-50 text-white;
 
     border-bottom: 1px solid #e4e5e7;
 
-    .header__logo {
-        @apply flex sm:flex-1 items-center;
+    div {
 
+        @apply w-full flex justify-between items-center;
+
+        .header__logo {
+            @apply flex w-1/3 md:w-auto md:flex-auto lg:flex-1 items-center;
+        }
         
-    }
-    
-    .header__menu {
-        @apply block px-2 sm:px-0 lg:hidden mr-3;
-    }
-    .modal__button {
-        @apply text-white bg-black rounded-md px-4 py-3;
-    }
-
-
-    .header__nav {
-        @apply flex items-center;
-
-        svg {
-            @apply mr-2 transition-all;
+        .header__menu {
+            @apply inline-block w-1/3 md:w-auto px-2 sm:px-0 lg:hidden mr-3;
         }
 
-        .nav__item {
-            @apply hidden lg:block px-5 py-4;
-
-            a {
-                 @apply font-semibold transition-all;
-            
+        .modal__button {
+            @apply text-white bg-black rounded-md px-4 py-3;
+        }
+    
+    
+        .header__nav {
+            @apply flex items-center w-1/3 justify-end md:w-auto;
+    
+            svg {
+                @apply mr-2 transition-all;
             }
-
-            &:hover {
-                a, svg {
-                    color: #5bbc7b;
+    
+            .nav__item {
+                @apply hidden lg:block px-5 py-4;
+    
+                a {
+                     @apply font-semibold transition-all;
+                
+                }
+    
+                &:hover {
+                    a, svg {
+                        color: #5bbc7b;
+                    }
+                }
+    
+                &:nth-child(5) {
+                    @apply block px-1 sm:px-5;
+                }
+    
+                &:last-child {
+                    @apply hidden sm:block bg-transparent rounded-lg py-2 px-4 text-sm;
+                    border: 2px solid #fff;
+                }
+    
+                &.scrolled {
+                    border: 2px solid #000;
                 }
             }
+        }
+    }
 
-            &:nth-child(5) {
-                @apply block px-1 sm:px-5;
+    .header__sub {
+        ul {
+            @apply w-[95%] mx-auto flex items-center justify-around overflow-scroll;
+
+            li {
+                @apply px-3;
             }
+        }
+    }
 
-            &:last-child {
-                @apply hidden sm:block bg-transparent rounded-lg py-2 px-4 text-sm;
-                border: 2px solid #000;
+    &.scrolled {
+        @apply bg-white text-black;
+
+        .header__logo {
+            svg {
+                @apply text-white
             }
         }
     }
