@@ -1,0 +1,23 @@
+.welcome {
+    @apply px-8 py-16;
+
+    .welcome__wrapper {
+        @apply flex items-center bg-pink-900 rounded-md;
+
+        .welcome__info {
+            @apply w-full lg:w-2/3 py-8 px-16 lg:px-32;
+
+            h1 {
+                @apply text-3xl lg:text-5xl text-white font-bold mb-12 lg:mb-16;
+            }
+
+            button {
+                @apply px-6 py-2 text-white bg-green-500 rounded-md font-bold;
+            }
+        }
+
+        .welcome__banner {
+            @apply hidden lg:block w-1/3 p-8;
+        }
+    }
+}

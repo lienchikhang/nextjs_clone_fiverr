@@ -1,12 +1,41 @@
 .jobTypes {
     @apply px-8 py-16;
 
+    h2 {
+        @apply text-3xl font-bold mb-4;
+    }
+
     .jobTypes__list {
-        @apply grid grid-cols-10 gap-10;
+        @apply grid grid-cols-12 md:grid-cols-9 lg:grid-cols-10 md:gap-10 cursor-pointer;
 
         .jobTypes__item {
-            @apply col-span-2;
+            @apply col-span-6 md:col-span-3 lg:col-span-2 relative;
+
+            div {
+                @apply relative;
+
+
+                img {
+                    @apply object-cover block mb-4 mx-auto relative w-[60px] h-[60px];
+    
+                }
+                &::after {
+                    content: '';
+                    @apply block absolute bottom-7 left-1/2 -translate-x-1/2 h-[2px] w-[60px] rounded-full bg-gray-500 transition-all;
+                }
+
+                &:hover::after {
+                    @apply h-[2px] w-[100px]  bg-green-500;
+                }
+
+                p {
+                    @apply text-center;
+                }
+            }
+
+
         }
+
     }
 
 
