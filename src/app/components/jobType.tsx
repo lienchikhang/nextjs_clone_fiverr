@@ -1,6 +1,12 @@
-import React from "react";
+'use client';
+import React, { useEffect } from "react";
 import "../styles/jobTypes.scss";
 import JobTypeItem from "./JobTypeItem";
+import http from "../config/axios.config";
+import useSWR from "swr";
+
+// const fetcher = (path: string) => http.get(path).then((res) => [console.log({ res })]);
+const fetcher = (path: string) => fetch(path).then((res) => res.json())
 
 const JobTypes = () => {
   const jobTypesList = [
@@ -33,6 +39,15 @@ const JobTypes = () => {
       job_name: "Graphics & Design",
     },
   ];
+
+  useEffect(() => {
+    http.get('/api/job-type/get-all').then((res) => console.log({ res }))
+  }, [])
+
+  const { data, error, isLoading } = useSWR('/api/job-type/get-all', fetcher);
+
+  console.log({ data });
+
 
   return (
     <section className="jobTypes">
