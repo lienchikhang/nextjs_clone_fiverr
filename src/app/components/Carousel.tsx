@@ -1,11 +1,16 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import "../styles/carousel.scss";
 import CustomArrow from "./CustomArrow";
 import SearchIcon from "@mui/icons-material/Search";
+import Link from "next/link";
 
 const Carousel = () => {
+  const [search, setSearch] = useState<string>("");
+
+  console.log({ search });
+
   const settings = {
     dots: false,
     fade: true,
@@ -18,6 +23,12 @@ const Carousel = () => {
     nextArrow: <CustomArrow />,
     prevArrow: <CustomArrow />,
   };
+
+  const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
+    setSearch(e.currentTarget.value);
+  };
+
+  const handleClick = () => {};
 
   return (
     <div className="carousel">
@@ -49,10 +60,22 @@ const Carousel = () => {
             Find the right freelance <br /> service, right away
           </h2>
           <div className="search__bar">
-            <input type="text" placeholder="Search for any services..." />
-            <button>
+            <input
+              type="text"
+              placeholder="Search for any services..."
+              onChange={handleSearch}
+            />
+            <Link
+              className="search-btn"
+              href={{
+                pathname: "/search",
+                query: {
+                  name: search,
+                },
+              }}
+            >
               <SearchIcon />
-            </button>
+            </Link>
           </div>
           <div className="search__suggestion">
             <p>Popular:</p>

@@ -6,7 +6,9 @@ import http from "../config/axios.config";
 import useSWR from "swr";
 
 // const fetcher = (path: string) => http.get(path).then((res) => [console.log({ res })]);
-const fetcher = (path: string) => fetch(path).then((res) => res.json())
+const fetcher = (path: string) => fetch(path)
+  .then((res) => res.json())
+
 
 const JobTypes = () => {
   const jobTypesList = [
@@ -48,12 +50,17 @@ const JobTypes = () => {
 
   console.log({ data });
 
+  if (error) {
+    console.log('error::', error);
+
+  }
+
 
   return (
     <section className="jobTypes">
       <h2>You need it, we've got it</h2>
       <div className="jobTypes__list">
-        {jobTypesList.map((jobType, idx) => {
+        {data && jobTypesList.map((jobType, idx) => {
           return (
             <JobTypeItem
               className="jobTypes__item"
@@ -63,6 +70,7 @@ const JobTypes = () => {
             />
           );
         })}
+        {error && <h1>Error</h1>}
       </div>
     </section>
   );

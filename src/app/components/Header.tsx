@@ -19,10 +19,14 @@ import "../styles/header.scss";
 import ItemMenu from "./ItemMenu";
 import CustomArrow from "./CustomArrow";
 import Slider from "react-slick";
+import { usePathname, useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(false);
+
+  console.log({ router });
 
   const subHeaders = [
     "Graphics & Design",
@@ -53,18 +57,25 @@ const Header = () => {
   const handleScroll = () => {
     const scrollPosition = window.scrollY || document.documentElement.scrollTop;
     if (scrollPosition > 50) {
-      setShowNavbar(true);
+      if (router == "/") setShowNavbar(true);
+      else setShowNavbar(false);
     } else {
-      setShowNavbar(false);
+      if (router == "/") setShowNavbar(false);
+      else setShowNavbar(true);
     }
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    if (!router.split("/")[1]) {
+      window.addEventListener("scroll", handleScroll);
+    } else {
+      window.removeEventListener("scroll", handleScroll);
+      setShowNavbar(true);
+    }
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [router]);
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {

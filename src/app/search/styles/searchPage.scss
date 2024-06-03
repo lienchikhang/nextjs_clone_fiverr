@@ -1,0 +1,86 @@
+.searchPage__wrapper {
+    @apply mt-24 px-8 pb-16 pt-8;
+
+    .search__navbar {
+
+        @apply mb-8;
+
+        h2 {
+            @apply text-2xl mb-4; 
+        }
+
+        .search__menu {
+            @apply flex items-center w-1/2 gap-5;
+            
+            .navbar__btn {
+                @apply rounded-md px-4 py-2 text-black font-bold;
+                border: 1px solid rgb(214, 214, 214);
+            }
+
+        }
+        
+    }
+
+    .jobList {
+        @apply grid grid-cols-12 gap-5 mb-8;
+
+        .jobItem {
+            @apply col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-3;
+
+
+            .jobItem__image {
+                @apply w-full h-[200px] object-cover rounded-md mb-2 ;
+                box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
+            }
+
+            .jobItem__name {
+                @apply tracking-wider mb-2;
+
+                color: #404145;
+            }
+            
+            .jobItem__star {
+                @apply mb-2;
+            }
+        }
+    }
+
+    .jobList__pages {
+        @apply mx-auto;
+
+        .MuiStack-root.css-1sazv7p-MuiStack-root {
+
+            nav {
+
+                ul {
+
+                    @apply justify-center;
+                }
+
+            }
+        }
+    }
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.MuiMenu-paper.MuiMenu-paper.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+    @apply p-4 mt-2;
+
+    .input-price {
+        @apply px-4 py-3 rounded-md;
+        border: 1px solid #dadbdd;
+    }
+    
+    .btn-section {
+        @apply flex justify-between mt-4 pt-4;
+        border-top: 1px solid #dadbdd;
+
+
+        button {
+            @apply font-bold text-base text-gray-500 gap-5 px-6 py-3 rounded-md;
+
+            &:last-child {
+                @apply text-white bg-black;
+            }
+        }
+    }
+}
