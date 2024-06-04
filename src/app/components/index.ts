@@ -9,6 +9,7 @@ import ItemMenu from "./ItemMenu";
 import JobTypes from "./jobType";
 import JobTypeItem from "./JobTypeItem";
 import Promotion from "./Promotion";
+import ModalAuth from "./ModalAuth";
 
 export {
     Header,
@@ -22,4 +23,5 @@ export {
     JobTypes,
     JobTypeItem,
     Promotion,
+    ModalAuth,
 }
