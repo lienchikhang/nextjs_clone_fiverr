@@ -5,13 +5,32 @@ import ModalStateDefault from "./ModalStateDefault";
 import ModalStateDefaultLogin from "./ModalStateDefaultLogin";
 import ModalStateRegister from "./ModalStateRegister";
 import ModalStateConfirm from "./ModalStateConfirm";
+import ModalStateOtp from "./ModalStateOtp";
+import ModalStateLogin from "./ModalStateLogin";
 
 interface Props {
   state: number;
   updateState: (number: number) => void;
+  handleCloseModal: () => void;
 }
 
-const ModalRight: React.FC<Props> = ({ state, updateState }) => {
+export interface IData {
+  email: string;
+  password: string;
+  full_name: string;
+}
+
+const ModalRight: React.FC<Props> = ({
+  state,
+  updateState,
+  handleCloseModal,
+}) => {
+  const [data, setData] = useState<IData | null>(null);
+
+  const updateData = (data: IData) => {
+    setData(data);
+  };
+
   return (
     <div>
       <TabGroup>
@@ -31,12 +50,32 @@ const ModalRight: React.FC<Props> = ({ state, updateState }) => {
         </Tab>
         <TabPanels>
           <TabPanel className="modal__top">
-            {state == 1 && <ModalStateDefaultLogin />}
+            {state == 1 && <ModalStateDefaultLogin updateState={updateState} />}
+            {state == 2 && (
+              <ModalStateLogin
+                updateState={updateState}
+                closeModal={handleCloseModal}
+              />
+            )}
           </TabPanel>
           <TabPanel className="modal__top">
             {state == 1 && <ModalStateDefault nextState={updateState} />}
-            {state == 2 && <ModalStateRegister updateState={updateState} />}
-            {state == 3 && <ModalStateConfirm updateState={updateState} />}
+            {state == 2 && (
+              <ModalStateRegister
+                updateState={updateState}
+                updateData={updateData}
+              />
+            )}
+            {state == 3 && (
+              <ModalStateConfirm
+                updateState={updateState}
+                updateData={updateData}
+                data={data}
+              />
+            )}
+            {state == 4 && (
+              <ModalStateOtp updateState={updateState} data={data} />
+            )}
           </TabPanel>
         </TabPanels>
       </TabGroup>

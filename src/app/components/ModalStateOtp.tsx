@@ -1,23 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { IData } from "./ModalRight";
+import Otp from "./Otp";
+import { Input, Typography } from "antd";
+import type { GetProp } from "antd";
+import type { OTPProps } from "antd/es/input/OTP";
 
 interface Props {
   updateState: (number: number) => void;
-  updateData: (data: IData) => void;
   data: IData | null;
 }
 
 interface FormValues {
-  full_name: string;
+  otp: string;
 }
 
-const ModalStateConfirm: React.FC<Props> = ({
-  updateState,
-  updateData,
-  data,
-}) => {
+const ModalStateOtp: React.FC<Props> = ({ updateState, data }) => {
+  const { Title } = Typography;
   const {
     register,
     handleSubmit,
@@ -25,16 +25,18 @@ const ModalStateConfirm: React.FC<Props> = ({
     setFocus,
     control,
   } = useForm<FormValues>();
+  const [code, setCode] = useState("");
 
-  const onSubmit: SubmitHandler<FormValues> = async (formData) => {
-    updateState(1);
-    if (data) {
-      updateData({
-        ...data,
-        full_name: formData.full_name,
-      });
-    }
+  const onChange: GetProp<typeof Input.OTP, "onChange"> = (text) => {
+    console.log("onChange:", text);
+    setCode(text);
   };
+
+  const sharedProps: OTPProps = {
+    onChange,
+  };
+
+  const onSubmit: SubmitHandler<FormValues> = async (formData) => {};
 
   return (
     <div>
@@ -42,42 +44,37 @@ const ModalStateConfirm: React.FC<Props> = ({
         <ArrowBackIcon />
         Back
       </button>
-      <h1>Continue with your email</h1>
+      <h1>Confirm your email</h1>
       <div className="form__wrapper">
         <form action="" onSubmit={handleSubmit(onSubmit)}>
           <Controller
-            name="full_name"
+            name="otp"
             control={control}
             defaultValue=""
             rules={{
-              required: "Fullname không được bỏ trống",
+              required: "Otp không được bỏ trống",
             }}
             render={({ field, fieldState }) => {
               return (
                 <div className="modal__form">
-                  <label htmlFor="">Full name</label>
-                  <input
-                    type="text"
-                    placeholder="john_wick"
-                    {...register("full_name")}
+                  <Title level={5}>
+                    Enter the verification code we emailed to: {data?.email}.
+                  </Title>
+                  <Input.OTP
+                    formatter={(str) => str.toUpperCase()}
+                    {...sharedProps}
                   />
                 </div>
               );
             }}
           />
 
-          {errors.full_name && (
-            <p className="px-1 text-sm text-red-500">
-              {errors.full_name.message}
-            </p>
-          )}
-
           <div className="btn__wrapper">
             <button
-              className={`${errors.full_name ? "unactive" : "active"}`}
+              className={`${errors.otp ? "unactive" : "active"}`}
               type="submit"
             >
-              Create my account
+              Submit
             </button>
           </div>
         </form>
@@ -86,4 +83,4 @@ const ModalStateConfirm: React.FC<Props> = ({
   );
 };
 
-export default ModalStateConfirm;
+export default ModalStateOtp;

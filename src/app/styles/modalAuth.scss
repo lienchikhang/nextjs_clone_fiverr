@@ -68,16 +68,20 @@
                 @apply mt-9;
 
                 button {
-                    @apply w-full rounded-md px-6 py-2 border flex flex-col items-center justify-center mb-3;
+                    @apply w-full rounded-md px-6 py-2 font-semibold border flex flex-col items-center justify-center mb-3;
 
                     &.active {
                         @apply bg-black text-white;
+                    }
+                    &.unactive {
+                        @apply bg-gray-200 text-gray-500;
                     }
                 }
 
                 &:last-child {
                     @apply mt-4 flex justify-between items-center gap-5;
                 }
+
             }
 
             .btn-back {
@@ -100,6 +104,10 @@
 
                     input {
                         @apply px-4 py-2 border outline-none rounded-md;
+
+                        &.error {
+                            @apply border-red-500;
+                        }
                     }
                 }
             }

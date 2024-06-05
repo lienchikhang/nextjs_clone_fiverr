@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from "react";
+"use client";
+import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {
-  HAS_MIN_DIGITS,
-  IS_EMAIL,
-  HAS_LOWER_CHAR,
-  HAS_SPEC_CHAR,
-  HAS_UPPER_CHAR,
-} from "../libs/constants";
-import { IData } from "./ModalRight";
+import { IS_EMAIL } from "../libs/constants";
 
 interface Props {
   updateState: (number: number) => void;
-  updateData: (data: IData) => void;
+  closeModal: () => void;
 }
 
 interface FormValues {
@@ -27,26 +21,7 @@ const validateEmail = (value: string) => {
   return true;
 };
 
-const validatePassword = (value: string) => {
-  if (!HAS_MIN_DIGITS.test(value)) {
-    return "Password có ít nhất 6 kí tự!";
-  }
-
-  if (!HAS_LOWER_CHAR.test(value)) {
-    return "Password có ít nhất 1 kí tự thường!";
-  }
-
-  if (!HAS_UPPER_CHAR.test(value)) {
-    return "Password có ít nhất 1 kí tự hoa!";
-  }
-
-  if (!HAS_SPEC_CHAR.test(value)) {
-    return "Password có ít nhất 1 kí tự đặc biệt!";
-  }
-  return true;
-};
-
-const ModalStateRegister: React.FC<Props> = ({ updateState, updateData }) => {
+const ModalStateLogin: React.FC<Props> = ({ updateState, closeModal }) => {
   const {
     register,
     handleSubmit,
@@ -55,18 +30,16 @@ const ModalStateRegister: React.FC<Props> = ({ updateState, updateData }) => {
     control,
   } = useForm<FormValues>();
 
+  const onSubmit: SubmitHandler<FormValues> = async (formData) => {
+    //call api login
+    console.log({ formData });
+    //close
+    closeModal();
+  };
+
   useEffect(() => {
     setFocus("email");
   }, []);
-
-  const onSubmit: SubmitHandler<FormValues> = async (formData) => {
-    updateState(1);
-    updateData({
-      email: formData.email,
-      password: formData.password,
-      full_name: "",
-    });
-  };
 
   return (
     <div>
@@ -74,7 +47,7 @@ const ModalStateRegister: React.FC<Props> = ({ updateState, updateData }) => {
         <ArrowBackIcon />
         Back
       </button>
-      <h1>Continue with your email</h1>
+      <h1>Continue with your email or username</h1>
       <div className="form__wrapper">
         <form action="" onSubmit={handleSubmit(onSubmit)}>
           <Controller
@@ -110,7 +83,6 @@ const ModalStateRegister: React.FC<Props> = ({ updateState, updateData }) => {
             defaultValue=""
             rules={{
               required: "Password không được bỏ trống",
-              validate: validatePassword,
             }}
             render={({ field, fieldState }) => {
               return (
@@ -144,4 +116,4 @@ const ModalStateRegister: React.FC<Props> = ({ updateState, updateData }) => {
   );
 };
 
-export default ModalStateRegister;
+export default ModalStateLogin;

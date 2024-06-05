@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import "../styles/modalAuth.scss";
@@ -42,9 +42,14 @@ const ModalAuth = () => {
           {state == 1 && <ModalLeftDefault />}
           {state == 2 && <ModalLeftRegister />}
           {state == 3 && <ModalLeftRegister />}
+          {state == 4 && <ModalLeftRegister />}
         </div>
         <div className="modal__right">
-          <ModalRight state={state} updateState={updateState} />
+          <ModalRight
+            state={state}
+            updateState={updateState}
+            handleCloseModal={handleClose}
+          />
         </div>
       </Box>
     </Modal>
