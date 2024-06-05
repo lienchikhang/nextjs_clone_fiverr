@@ -20,6 +20,7 @@ import ItemMenu from "./ItemMenu";
 import CustomArrow from "./CustomArrow";
 import Slider from "react-slick";
 import { usePathname, useRouter } from "next/navigation";
+import SearchBar from "./SearchBar";
 
 const Header = () => {
   const router = usePathname();
@@ -147,6 +148,7 @@ const Header = () => {
           >
             {list()}
           </SwipeableDrawer>
+          {showNavbar && <SearchBar />}
           <ul className="header__nav">
             <li className="nav__item">
               <NavItemSelect text="Fiverr Pro" link="/test" />
