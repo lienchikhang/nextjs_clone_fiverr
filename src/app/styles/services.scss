@@ -6,32 +6,32 @@
     }
 
     .service__article {
-        @apply w-[240px] h-[300px] px-2;
+        @apply w-[240px] h-[345px] px-2;
 
         .article__wrapper {
             @apply relative w-full h-full mr-3;
 
-        &::after {
-            @apply block absolute top-0 left-0 w-full h-full;
-            content: '';
-            background-image: linear-gradient(rgba(0,0,0,0.15),transparent);
-        }
-
-        .service__title {
-            @apply absolute top-7 left-7 z-20;
-
-            .title__sub {
-                @apply text-white;
+            &::after {
+                @apply block absolute top-0 left-0 w-full h-full;
+                content: '';
+                background-image: linear-gradient(rgba(0, 0, 0, 0.15), transparent);
             }
 
-            .title__main {
-                @apply text-white text-xl font-bold;
-            }
-        }
+            .service__title {
+                @apply absolute top-7 left-7 z-20;
 
-        .service__img {
-            @apply rounded-sm block object-cover w-full h-full;
-        }
+                .title__sub {
+                    @apply text-white;
+                }
+
+                .title__main {
+                    @apply text-white text-xl font-bold;
+                }
+            }
+
+            .service__img {
+                @apply rounded-sm block object-cover w-full h-full;
+            }
         }
     }
 

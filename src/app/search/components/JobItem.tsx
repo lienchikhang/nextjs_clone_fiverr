@@ -1,16 +1,10 @@
 import Image from "next/image";
 import React from "react";
+import { IJob } from "./JobList";
+import Link from "next/link";
 
 interface Props {
-  data: Job;
-}
-
-interface Job {
-  image: string;
-  name: string;
-  job_short_desc: string;
-  star: number;
-  price: number;
+  data: IJob;
 }
 
 const JobItem: React.FC<Props> = ({ data }) => {
@@ -23,7 +17,10 @@ const JobItem: React.FC<Props> = ({ data }) => {
         width={200}
         height={150}
       />
-      <p className="jobItem__name">{data.job_short_desc}</p>
+      {/* <p className="jobItem__name">{data.job_short_desc}</p> */}
+      <Link className="jobItem__name" href={{
+        pathname: `/search/${data.job_short_desc}/${data.job_id}`,
+      }}>{data.job_short_desc}</Link>
       <p className="jobItem__star">{data.star}</p>
       <p className="jobItem__price">
         <strong>From {data.price && data.price.toLocaleString()}</strong>

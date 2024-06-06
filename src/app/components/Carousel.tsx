@@ -9,7 +9,6 @@ import Link from "next/link";
 const Carousel = () => {
   const [search, setSearch] = useState<string>("");
 
-  console.log({ search });
 
   const settings = {
     dots: false,
@@ -28,7 +27,7 @@ const Carousel = () => {
     setSearch(e.currentTarget.value);
   };
 
-  const handleClick = () => {};
+  const handleClick = () => { };
 
   return (
     <div className="carousel">

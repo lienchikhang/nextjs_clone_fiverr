@@ -10,8 +10,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
         let response = await http.get(query);
 
-        console.log('res', response);
-
         const res = NextResponse.json(response.data);
 
         return res;
@@ -20,11 +18,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
         console.log({ error });
 
-        return NextResponse.json({
-            error: {
-                mess: 'InternalError'
-            }
-        })
+        return NextResponse.error();
     }
 
 }
