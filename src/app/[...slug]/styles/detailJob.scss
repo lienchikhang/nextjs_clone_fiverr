@@ -2,7 +2,7 @@
     @apply mt-24 px-8 pb-16 pt-8 grid grid-cols-12 md:gap-5 xl:gap-10;
 
     .detailJob__left {
-        @apply col-span-12  xl:col-span-8;
+        @apply col-span-12 xl:col-span-8;
 
         h1 {
             @apply text-3xl font-bold mb-4;
@@ -90,7 +90,7 @@
                             @apply text-base text-gray-600 mb-2;
                         }
 
-                    
+
                     }
                 }
             }
@@ -144,57 +144,57 @@
     }
 
     .detailJob__right {
-        @apply col-span-12  xl:col-span-4 relative;
+        @apply col-span-12 xl:col-span-4 relative;
 
         .tab__wrapper {
             @apply sticky top-28;
 
             .tab__top {
-    
+
                 .top__item {
                     @apply px-6 py-4 w-1/3 font-bold;
                     border: 1px solid #dadbdd;
                     color: #74767d;
                 }
-    
+
             }
-    
+
             .tab__bottom {
                 @apply px-6 py-7;
                 border: 1px solid #dadbdd;
                 border-top: 0px;
-    
+
                 .hiredDetail__wrapper {
                     .hiredDetail__top {
                         @apply flex justify-between items-center mb-4;
-    
+
                         h2 {
                             @apply font-semibold text-black uppercase;
                         }
-    
+
                         p {
                             @apply text-base;
                         }
                     }
-    
+
                     .hiredDetail__content {
                         @apply mb-4;
-    
+
                         .hiredDetail__desc {
                             @apply mb-4;
                             color: #74767d;
                         }
-    
+
                         .hiredDetail__time {
                             @apply font-bold mb-4;
                             color: #74767d;
-    
+
                         }
-    
+
                         ul {
                             li {
                                 @apply flex items-center gap-3 mb-2;
-    
+
                                 p {
                                     @apply text-sm;
                                     color: #74767d;
@@ -202,27 +202,27 @@
                             }
                         }
                     }
-    
+
                     .hiredDetail__bottom {
                         button {
                             @apply w-full bg-black text-white font-bold rounded-md px-4 py-2;
 
                             &.disabled {
-                                @apply bg-slate-600 cursor-wait text-gray-800;
+                                @apply bg-gray-200 cursor-wait text-gray-800;
                             }
                         }
-    
+
                         p {
                             @apply px-4 py-2 text-center text-sm;
                         }
                     }
                 }
             }
-    
+
             .contact {
                 @apply p-6 mt-6;
                 background-color: #fafafa;
-    
+
                 button {
                     @apply w-full rounded-md border border-black font-semibold px-4 py-2;
                     color: #74767d;
@@ -273,13 +273,14 @@
 
             .quantity__wrapper {
                 @apply border-2 border-black rounded-lg p-4;
-                
+
                 .quantity__price {
                     @apply flex justify-between items-center;
                 }
-                
+
                 .quantity__action {
-                    @apply  flex justify-between items-center pt-4 border-t border-gray-400;
+                    @apply flex justify-between items-center pt-4 border-t border-gray-400;
+
                     p {
                         @apply text-sm;
                     }
@@ -303,6 +304,7 @@
 
                 .subscribe__title {
                     @apply pb-4 border-b;
+
                     h2 {
                         @apply mb-1;
                     }
@@ -324,9 +326,9 @@
     }
 
     .drawer__footer {
-        @apply absolute bottom-0 left-0 w-full py-5 px-6 border-t border-gray-500;
+        @apply absolute bottom-0 left-0 w-full py-5 px-6 border-t border-gray-500 bg-white;
 
-        button {
+        .btn {
             @apply w-full bg-black rounded-sm px-8 py-3 mb-2 text-white font-semibold;
         }
 

@@ -1,6 +1,6 @@
-import { IComment } from "@/app/interfaces";
 import { Avatar, Box, Rating, Skeleton, Typography } from "@mui/material";
 import React from "react";
+import { IComment } from "./CommentSection";
 
 interface Props {
   data: IComment;
@@ -19,11 +19,11 @@ const CommentItem: React.FC<Props> = ({ data, hasError }) => {
             <Skeleton />
           </Typography>
         ) : (
-          <h2 className="comment__username">{data.name}</h2>
+          <h2 className="comment__username">{data.Users.full_name}</h2>
         )}
         <div className="comment__rating">
-          <Rating name="read-only" value={data.star} readOnly />
-          <p className="comment__star">{data.star}</p>
+          <Rating name="read-only" value={data.stars} readOnly />
+          <p className="comment__star">{data.stars}</p>
         </div>
         {hasError ? (
           <Box className="comment__handle">

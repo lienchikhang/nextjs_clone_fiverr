@@ -102,9 +102,13 @@ const Content = () => {
           </Typography>
         )}
         {IDataJob ? (
-          <p className="star">
-            {IDataJob.content.data.star} ({IDataJob.content.data.star})
-          </p>
+          <div className="star">
+            <StarIcon />
+            <div>
+              <span>{IDataJob.content.data.star}</span>
+              <span>({IDataJob.content.data.star})</span>
+            </div>
+          </div>
         ) : (
           <div className="star">
             <StarIcon />
@@ -118,10 +122,10 @@ const Content = () => {
           {IDataJob ? (
             <Avatar
               alt="Remy Sharp"
-              src="/static/images/avatar/1.jpg"
+              src={IDataJob.content.data.image && IDataJob.content.data.image}
               sx={{ width: 100, height: 100 }}
             >
-              {IDataJob.content.data.Users.full_name}
+              {IDataJob.content.data.Users.full_name[0]}
             </Avatar>
           ) : (
             <Avatar
@@ -190,7 +194,7 @@ const Content = () => {
         </div>
       </div>
       <div className="detailJob__right">
-        <HireSection hasError={error ? true : false} />
+        <HireSection price={IDataJob?.content?.data?.price} desc={IDataJob?.content?.data?.job_short_desc} hasError={error ? true : false} />
       </div>
     </React.Fragment>
   );

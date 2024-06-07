@@ -8,30 +8,67 @@ const fetcher = (path: string) => fetch(path).then((res) => res.json());
 
 const comments = [
   {
-    name: "tanner1211",
-    star: 5,
+    Users: {
+      avatar: null,
+      full_name: "tanner1211",
+    },
+    stars: 5,
+    createdAt: new Date(),
     content:
       "Quick delivery, went above and beyond, and perfected the code. Don’t go to anyone else because this guy is your best asset.",
   },
   {
-    name: "tanner1211",
-    star: 5,
+    Users: {
+      avatar: null,
+      full_name: "tanner1211",
+    },
+    stars: 5,
+    createdAt: new Date(),
     content:
       "Quick delivery, went above and beyond, and perfected the code. Don’t go to anyone else because this guy is your best asset.",
   },
   {
-    name: "tanner1211",
-    star: 5,
+    Users: {
+      avatar: null,
+      full_name: "tanner1211",
+    },
+    stars: 5,
+    createdAt: new Date(),
     content:
       "Quick delivery, went above and beyond, and perfected the code. Don’t go to anyone else because this guy is your best asset.",
   },
   {
-    name: "tanner1211",
-    star: 5,
+    Users: {
+      avatar: null,
+      full_name: "tanner1211",
+    },
+    stars: 5,
+    createdAt: new Date(),
     content:
       "Quick delivery, went above and beyond, and perfected the code. Don’t go to anyone else because this guy is your best asset.",
   },
+  {
+    Users: {
+      avatar: null,
+      full_name: "tanner1211",
+    },
+    stars: 5,
+    createdAt: new Date(),
+    content:
+      "Quick delivery, went above and beyond, and perfected the code. Don’t go to anyone else because this guy is your best asset.",
+  },
+
 ];
+
+export interface IComment {
+  Users: {
+    avatar: null | string;
+    full_name: string;
+  },
+  content: string;
+  createdAt: Date;
+  stars: number;
+}
 
 const CommentSection = () => {
   const [job, setJob] = useState(null);
@@ -60,7 +97,7 @@ const CommentSection = () => {
     <React.Fragment>
       <div>
         {data &&
-          comments.map((comment, idx) => {
+          data.content.data.map((comment: IComment, idx: number) => {
             return <CommentItem data={comment} key={idx} />;
           })}
       </div>
