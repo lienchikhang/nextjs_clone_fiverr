@@ -5,9 +5,12 @@ import CheckIcon from "@mui/icons-material/Check";
 
 interface Props {
   type: string;
+  hasError?: boolean;
 }
 
-const HiredDetail: React.FC<Props> = ({ type }) => {
+const HiredDetail: React.FC<Props> = ({ type, hasError }) => {
+  const handleClick = () => {};
+
   return (
     <div className="hiredDetail__wrapper">
       <div className="hiredDetail__top">
@@ -41,7 +44,12 @@ const HiredDetail: React.FC<Props> = ({ type }) => {
         </ul>
       </div>
       <div className="hiredDetail__bottom">
-        <button>Continue</button>
+        <button
+          onClick={handleClick}
+          className={`${hasError ? "disabled" : ""}`}
+        >
+          Continue
+        </button>
         <p>Compare package</p>
       </div>
     </div>

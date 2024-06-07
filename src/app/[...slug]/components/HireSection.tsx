@@ -3,7 +3,11 @@ import React from "react";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import HiredDetail from "./HiredDetail";
 
-const HireSection = () => {
+interface Props {
+  hasError?: boolean;
+}
+
+const HireSection: React.FC<Props> = ({ hasError = false }) => {
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -25,13 +29,13 @@ const HireSection = () => {
       </TabList>
       <TabPanels className="tab__bottom">
         <TabPanel className="bottom__item">
-          <HiredDetail type="basic" />
+          <HiredDetail hasError={hasError} type="basic" />
         </TabPanel>
         <TabPanel className="bottom__item">
-          <HiredDetail type="standard" />
+          <HiredDetail hasError={hasError} type="standard" />
         </TabPanel>
         <TabPanel className="bottom__item">
-          <HiredDetail type="premium" />
+          <HiredDetail hasError={hasError} type="premium" />
         </TabPanel>
       </TabPanels>
       <div className="contact">

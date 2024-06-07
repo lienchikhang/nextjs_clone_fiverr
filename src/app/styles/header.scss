@@ -69,12 +69,18 @@ header {
     }
 
     .header__sub {
-        ul {
-            @apply w-[95%] mx-auto flex items-center justify-around overflow-scroll;
+        // ul {
+        //     @apply w-[95%] mx-auto grid-cols-12 items-center justify-around overflow-scroll;
 
-            li {
-                @apply px-3;
-            }
+        //     li {
+        //         @apply px-3 col-span-2;
+        //     }
+        // }
+
+        @apply flex flex-nowrap;
+
+        div {
+            @apply w-[40%];
         }
     }
 

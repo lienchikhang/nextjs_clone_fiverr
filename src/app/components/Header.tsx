@@ -173,15 +173,13 @@ const Header = () => {
         </div>
         {showNavbar && (
           <div className="header__sub">
-            <Slider {...settings}>
-              {subHeaders.map((sub, idx) => {
-                return (
-                  <div key={idx}>
-                    <p>{sub}</p>
-                  </div>
-                );
-              })}
-            </Slider>
+            {subHeaders.map((sub, idx) => {
+              return (
+                <div key={idx}>
+                  <p>{sub}</p>
+                </div>
+              );
+            })}
           </div>
         )}
       </header>
