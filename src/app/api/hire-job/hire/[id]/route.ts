@@ -1,39 +1,19 @@
 import http from "@/app/config/axios.config";
-import { ErrorResponse } from "@/app/interfaces/auth.interface";
-import { AxiosError } from "axios";
-import { NextApiRequest } from "next";
+import axios, { AxiosError } from "axios";
 import { NextRequest, NextResponse } from "next/server";
+// import Cookies from 'js-cookie';
+import { cookies } from 'next/headers';
+import { ErrorResponse } from "@/app/interfaces/auth.interface";
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest, res: NextResponse) {
     try {
         // const body = await new Response(req.body).json();
 
         const query = req.url.split('api/')[1];
-
-        let response = await http.get(query);
-
-        const res = NextResponse.json(response.data);
-
-        return res;
-
-    } catch (error) {
-
-        console.log({ error });
-
-        return NextResponse.error();
-    }
-
-}
-
-export async function POST(req: NextRequest, res: NextResponse) {
-    try {
-        const body = await new Response(req.body).json();
-
-        const query = req.url.split('api/')[1];
-        console.log({ body, query });
+        console.log({ query });
         console.log(req.cookies.get('accessToken')?.value)
 
-        let response = await http.post(query, body, {
+        let response = await http.post(query, null, {
             headers: {
                 'Authorization': `Bearer ${req.cookies.get('accessToken')?.value}`
             }
@@ -43,13 +23,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
         const res = NextResponse.json(response.data);
 
+        console.log({ res });
         return res;
 
     } catch (error) {
 
-        const err = error as AxiosError
-
-        console.log({ err })
+        const err = error as AxiosError;
 
         if (err.response) {
             const axiosErrorResponse = err.response.data as ErrorResponse;

@@ -3,8 +3,13 @@ import React, { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IS_EMAIL } from "../libs/constants";
+import axios from "axios";
+import Cookies from 'js-cookie';
+import { notification } from "antd";
+import { NotificationPlacement } from "antd/es/notification/interface";
+import { ModalProps } from "./ModalAuth";
 
-interface Props {
+interface Props extends ModalProps {
   updateState: (number: number) => void;
   closeModal: () => void;
 }
@@ -21,7 +26,7 @@ const validateEmail = (value: string) => {
   return true;
 };
 
-const ModalStateLogin: React.FC<Props> = ({ updateState, closeModal }) => {
+const ModalStateLogin: React.FC<Props> = ({ updateState, closeModal, notifyWarn }) => {
   const {
     register,
     handleSubmit,
@@ -32,8 +37,18 @@ const ModalStateLogin: React.FC<Props> = ({ updateState, closeModal }) => {
 
   const onSubmit: SubmitHandler<FormValues> = async (formData) => {
     //call api login
-    console.log({ formData });
-    //close
+    const rs = await axios.post('/api/auth/login', formData);
+
+    console.log({ rs })
+
+    if (rs.data.status == 200) {
+      //set cookie
+      Cookies.set('accessToken', rs.data.content.accessToken);
+      Cookies.set('refreshToken', rs.data.content.refreshToken);
+    } else if (rs.data.status == 400) {
+      notifyWarn(rs.data.content.mess);
+    }
+
     closeModal();
   };
 
@@ -102,9 +117,8 @@ const ModalStateLogin: React.FC<Props> = ({ updateState, closeModal }) => {
 
           <div className="btn__wrapper">
             <button
-              className={`${
-                errors.email || errors.password ? "unactive" : "active"
-              }`}
+              className={`${errors.email || errors.password ? "unactive" : "active"
+                }`}
               type="submit"
             >
               Continue

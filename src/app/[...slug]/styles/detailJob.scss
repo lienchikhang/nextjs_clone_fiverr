@@ -134,6 +134,12 @@
                         @apply flex items-center gap-2 mb-4;
 
                     }
+
+                    .comment__date {
+                        p {
+                            @apply text-sm;
+                        }
+                    }
                 }
             }
 
@@ -239,7 +245,7 @@
 }
 
 .MuiPaper-root.MuiPaper-elevation {
-    width: 35% !important;
+    @apply w-[90%] sm:w-[75%] md:w-[45%] xl:w-[35%];
 
     .drawer__title {
         @apply flex justify-between items-center py-4 px-6 border-b border-gray-500;

@@ -11,7 +11,7 @@ const CommentItem: React.FC<Props> = ({ data, hasError }) => {
   return (
     <div className="comment__wrapper">
       <div className="comment__image">
-        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        {hasError ? <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"></Avatar> : <Avatar alt="Remy Sharp" src={data.Users.avatar ? data.Users.avatar : ''} />}
       </div>
       <div className="comment__info">
         {hasError ? (
@@ -36,6 +36,9 @@ const CommentItem: React.FC<Props> = ({ data, hasError }) => {
         ) : (
           <p className="comment__content">{data.content}</p>
         )}
+        <div className="comment__date">
+          <p>{`${new Date(data.createdAt).getDate()}-${new Date(data.createdAt).getMonth() + 1}-${new Date(data.createdAt).getFullYear()}`}</p>
+        </div>
       </div>
     </div>
   );

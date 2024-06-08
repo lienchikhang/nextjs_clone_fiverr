@@ -27,8 +27,6 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(false);
 
-  console.log({ router });
-
   const subHeaders = [
     "Graphics & Design",
     "Programming & Tech",

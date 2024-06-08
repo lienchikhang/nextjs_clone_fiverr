@@ -17,7 +17,11 @@ const style = {
   boxShadow: 24,
 };
 
-const ModalAuth = () => {
+export interface ModalProps {
+  notifyWarn: (mess: string) => void;
+}
+
+const ModalAuth: React.FC<ModalProps> = ({ notifyWarn }) => {
   const [open, setOpen] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -49,6 +53,7 @@ const ModalAuth = () => {
             state={state}
             updateState={updateState}
             handleCloseModal={handleClose}
+            notifyWarn={notifyWarn}
           />
         </div>
       </Box>

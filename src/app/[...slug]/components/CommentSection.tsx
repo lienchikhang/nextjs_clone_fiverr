@@ -76,7 +76,7 @@ const CommentSection = () => {
   const params = useParams();
 
   const { data, error, isLoading } = useSWR(
-    `/api/comment/get/${params.slug[2]}`,
+    `/api/comment/get/${params.slug[2]}?page=${page}`,
     fetcher,
     {
       revalidateOnReconnect: true,
@@ -84,6 +84,12 @@ const CommentSection = () => {
   );
 
   console.log({ data, error });
+
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    console.log('Page changed to: ', value);
+    // Thực hiện các hành động khác như tải dữ liệu mới từ server khi chuyển trang
+  };
 
   if (error) {
     {
@@ -103,7 +109,7 @@ const CommentSection = () => {
       </div>
       <div className="comment__pages">
         <Stack spacing={2}>
-          <Pagination count={page * 10} variant="text" size="large" />
+          <Pagination count={data && data.content.page} variant="text" size="large" onChange={handleChange} />
         </Stack>
       </div>
     </React.Fragment>

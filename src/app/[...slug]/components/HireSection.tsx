@@ -5,11 +5,15 @@ import HiredDetail from "./HiredDetail";
 
 interface Props {
   hasError?: boolean;
-  price?: number;
-  desc?: string;
+  data: {
+    jobId: number,
+    image: string | null,
+    price: number,
+    desc: string,
+  }
 }
 
-const HireSection: React.FC<Props> = ({ hasError = false, price, desc }) => {
+const HireSection: React.FC<Props> = ({ hasError = false, data }) => {
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -31,7 +35,7 @@ const HireSection: React.FC<Props> = ({ hasError = false, price, desc }) => {
       </TabList>
       <TabPanels className="tab__bottom">
         <TabPanel className="bottom__item">
-          <HiredDetail price={price} desc={desc} hasError={hasError} type="basic" />
+          <HiredDetail data={data} hasError={hasError} type="basic" />
         </TabPanel>
         <TabPanel className="bottom__item">
           <HiredDetail hasError={hasError} type="standard" />

@@ -7,8 +7,9 @@ import ModalStateRegister from "./ModalStateRegister";
 import ModalStateConfirm from "./ModalStateConfirm";
 import ModalStateOtp from "./ModalStateOtp";
 import ModalStateLogin from "./ModalStateLogin";
+import { ModalProps } from "./ModalAuth";
 
-interface Props {
+interface Props extends ModalProps {
   state: number;
   updateState: (number: number) => void;
   handleCloseModal: () => void;
@@ -24,6 +25,7 @@ const ModalRight: React.FC<Props> = ({
   state,
   updateState,
   handleCloseModal,
+  notifyWarn,
 }) => {
   const [data, setData] = useState<IData | null>(null);
 
@@ -35,16 +37,14 @@ const ModalRight: React.FC<Props> = ({
     <div>
       <TabGroup>
         <Tab
-          className={`btn-flex ${
-            state == 1 ? "block" : "hidden"
-          } data-[selected]:hidden`}
+          className={`btn-flex ${state == 1 ? "block" : "hidden"
+            } data-[selected]:hidden`}
         >
           Join in
         </Tab>
         <Tab
-          className={`btn-flex ${
-            state == 1 ? "block" : "hidden"
-          } data-[selected]:hidden`}
+          className={`btn-flex ${state == 1 ? "block" : "hidden"
+            } data-[selected]:hidden`}
         >
           Sign in
         </Tab>
@@ -55,6 +55,7 @@ const ModalRight: React.FC<Props> = ({
               <ModalStateLogin
                 updateState={updateState}
                 closeModal={handleCloseModal}
+                notifyWarn={notifyWarn}
               />
             )}
           </TabPanel>

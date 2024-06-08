@@ -3,16 +3,23 @@ import React, { useContext } from "react";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CheckIcon from "@mui/icons-material/Check";
 import { Context } from "@/app/redux";
+import { useParams } from "next/navigation";
 
 interface Props {
   type: string;
   hasError?: boolean;
-  price?: number;
-  desc?: string;
+  data?: {
+    jobId: number,
+    image: string | null,
+    price: number,
+    desc: string,
+  }
 }
 
-const HiredDetail: React.FC<Props> = ({ type, hasError, price, desc }) => {
+const HiredDetail: React.FC<Props> = ({ type, hasError, data }) => {
   const [state, dispatch] = useContext(Context);
+  const params = useParams();
+
   const handleClick = () => {
 
     if (hasError) return;
@@ -22,10 +29,13 @@ const HiredDetail: React.FC<Props> = ({ type, hasError, price, desc }) => {
       payload: true,
     });
     dispatch({
-      type: 'update::info::order',
+      type: 'set::info::order',
       payload: {
-        price,
-        desc,
+        id: data && data.jobId,
+        price: data && data.price,
+        desc: data && data.desc,
+        image: data && data.image,
+        quantity: 1,
       },
     });
   };
@@ -34,11 +44,11 @@ const HiredDetail: React.FC<Props> = ({ type, hasError, price, desc }) => {
     <div className="hiredDetail__wrapper">
       <div className="hiredDetail__top">
         <h2>{type}</h2>
-        <p>{price?.toLocaleString()}</p>
+        <p>{data && data.price?.toLocaleString()}</p>
       </div>
       <div className="hiredDetail__content">
         <p className="hiredDetail__desc">
-          {desc}
+          {data && data.desc}
         </p>
         <p className="hiredDetail__time">
           <AccessTimeIcon /> 11-day delivery

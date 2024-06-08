@@ -120,7 +120,11 @@ const Content = () => {
         )}
         <div className="detailJob__info">
           {IDataJob ? (
-            <Avatar
+            IDataJob.content.data.Users.avatar ? <Avatar
+              alt="Remy Sharp"
+              src={IDataJob.content.data.Users.avatar}
+              sx={{ width: 100, height: 100 }}
+            /> : <Avatar
               alt="Remy Sharp"
               src={IDataJob.content.data.image && IDataJob.content.data.image}
               sx={{ width: 100, height: 100 }}
@@ -194,7 +198,14 @@ const Content = () => {
         </div>
       </div>
       <div className="detailJob__right">
-        <HireSection price={IDataJob?.content?.data?.price} desc={IDataJob?.content?.data?.job_short_desc} hasError={error ? true : false} />
+        <HireSection
+          data={{
+            jobId: Number(params.slug[2]),
+            image: IDataJob?.content?.data?.image,
+            price: IDataJob?.content?.data?.price,
+            desc: IDataJob?.content?.data?.job_short_desc
+          }}
+          hasError={error ? true : false} />
       </div>
     </React.Fragment>
   );
