@@ -1,0 +1,94 @@
+.profile__wrapper {
+    @apply px-8 py-40 grid grid-cols-12 gap-28;
+    background-color: #f7f7f7;
+
+    .profile__info {
+        @apply col-span-4 rounded-sm flex justify-center items-center flex-col;
+
+        .info__wrapper {
+
+            @apply w-full flex flex-col justify-center items-center gap-5;
+
+            .user {
+                @apply w-full bg-white;
+
+                .info__top {
+                    @apply w-full p-6 flex items-center flex-col gap-4 border-b;
+
+                    img {
+                        @apply w-[150px] h-[150px];
+                    }
+
+                    .info__name {
+                        @apply font-semibold text-xl;
+                    }
+
+                    button {
+                        @apply px-6 w-full py-2 border border-black bg-transparent rounded-md text-sm;
+                    }
+                }
+
+                .info__bottom {
+                    @apply w-full flex flex-col justify-center items-center p-6 gap-3;
+
+                    .info__country {
+                        @apply w-full flex justify-between items-center;
+                    }
+
+                    .info__member {
+                        @apply w-full flex justify-between items-center;
+                    }
+
+                    p.title {
+                        @apply text-sm text-gray-400;
+                    }
+
+                    p.content {
+                        @apply text-sm font-semibold text-gray-500;
+                    }
+                }
+            }
+
+            .skill {
+                @apply w-full bg-white flex flex-col justify-center items-center px-6 rounded-sm;
+
+                .skill__section {
+                    @apply w-full border-b py-6;
+
+                    .section__heading {
+                        @apply flex justify-between items-center;
+
+                        .heading__title {
+                            @apply font-semibold;
+                        }
+
+                        .heading__link {
+                            @apply text-blue-400 text-sm cursor-pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .profile__jobList {
+        @apply col-span-8 bg-white rounded-sm p-6 relative;
+
+        .jobList__tile {
+
+            @apply pb-4 border-b-2;
+
+            h2 {
+                @apply text-xl font-semibold;
+            }
+        }
+
+        .jobs__wrapper {
+            @apply py-6;
+
+            .jobs__loading {
+                @apply absolute top-0 left-0 flex justify-center items-center w-full h-full bg-black/10;
+            }
+        }
+    }
+}

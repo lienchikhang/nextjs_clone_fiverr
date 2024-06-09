@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 export const initialState = {
     drawerConfirm: {
         isOpen: false,
@@ -10,7 +12,8 @@ export const initialState = {
         image: '',
         customer: '',
         paymentType: '',
-    }
+    },
+    session: false,
 }
 
 export interface State {
@@ -25,7 +28,8 @@ export interface State {
         image: string,
         customer: string,
         paymentType: string,
-    }
+    },
+    session: boolean,
 }
 
 
@@ -81,6 +85,12 @@ const reducer = (state = initialState as State, { type, payload }: Action) => {
                     ...state.infoOrder,
                     paymentType: payload,
                 }
+            }
+        }
+        case 'set::session': {
+            return {
+                ...state,
+                session: payload
             }
         }
         default: {

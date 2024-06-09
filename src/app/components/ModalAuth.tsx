@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import "../styles/modalAuth.scss";
@@ -7,6 +7,8 @@ import CheckIcon from "@mui/icons-material/Check";
 import ModalRight from "./ModalRight";
 import ModalLeftDefault from "./ModalLeftDefault";
 import ModalLeftRegister from "./ModalLeftRegister";
+import { Context } from "../redux";
+import Cookies from 'js-cookie';
 
 const style = {
   position: "absolute" as "absolute",
@@ -23,34 +25,32 @@ export interface ModalProps {
 
 const ModalAuth: React.FC<ModalProps> = ({ notifyWarn }) => {
   const [open, setOpen] = useState(true);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [step, setStep] = useState(1);
+  const [state, dispatch] = useContext(Context);
 
-  const [state, setState] = useState(1);
-
-  console.log({ state });
 
   const updateState = (number: number) => {
-    setState((prev) => prev + number);
+    setStep((prev) => prev + number);
   };
 
   return (
     <Modal
-      open={open}
+      open={Cookies.get('session') ? false : true}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
       <Box sx={style} className="modal__wrapper">
         <div className="modal__left">
-          {state == 1 && <ModalLeftDefault />}
-          {state == 2 && <ModalLeftRegister />}
-          {state == 3 && <ModalLeftRegister />}
-          {state == 4 && <ModalLeftRegister />}
+          {step == 1 && <ModalLeftDefault />}
+          {step == 2 && <ModalLeftRegister />}
+          {step == 3 && <ModalLeftRegister />}
+          {step == 4 && <ModalLeftRegister />}
         </div>
         <div className="modal__right">
           <ModalRight
-            state={state}
+            state={step}
             updateState={updateState}
             handleCloseModal={handleClose}
             notifyWarn={notifyWarn}

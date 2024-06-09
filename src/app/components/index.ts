@@ -1,4 +1,4 @@
-import Header from "./Header";
+import Header from "./header/Header";
 import Footer from "./Footer";
 import NavItem from "./NavItem";
 import NavItemSelect from "./NavItemSelect";

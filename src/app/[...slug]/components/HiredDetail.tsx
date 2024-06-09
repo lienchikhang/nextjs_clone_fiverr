@@ -1,9 +1,10 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CheckIcon from "@mui/icons-material/Check";
 import { Context } from "@/app/redux";
 import { useParams } from "next/navigation";
+import { CircularProgress } from "@mui/material";
 
 interface Props {
   type: string;
@@ -22,12 +23,15 @@ const HiredDetail: React.FC<Props> = ({ type, hasError, data }) => {
 
   const handleClick = () => {
 
-    if (hasError) return;
+    if (hasError) {
+      return;
+    }
 
     dispatch({
       type: 'change::open::confirm',
       payload: true,
     });
+
     dispatch({
       type: 'set::info::order',
       payload: {
@@ -38,6 +42,8 @@ const HiredDetail: React.FC<Props> = ({ type, hasError, data }) => {
         quantity: 1,
       },
     });
+
+
   };
 
   return (

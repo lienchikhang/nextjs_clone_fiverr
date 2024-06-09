@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IS_EMAIL } from "../libs/constants";
@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 import { notification } from "antd";
 import { NotificationPlacement } from "antd/es/notification/interface";
 import { ModalProps } from "./ModalAuth";
+import { Context } from "../redux";
 
 interface Props extends ModalProps {
   updateState: (number: number) => void;
@@ -27,6 +28,7 @@ const validateEmail = (value: string) => {
 };
 
 const ModalStateLogin: React.FC<Props> = ({ updateState, closeModal, notifyWarn }) => {
+  const [state, dispatch] = useContext(Context);
   const {
     register,
     handleSubmit,
@@ -42,9 +44,20 @@ const ModalStateLogin: React.FC<Props> = ({ updateState, closeModal, notifyWarn 
     console.log({ rs })
 
     if (rs.data.status == 200) {
+
       //set cookie
       Cookies.set('accessToken', rs.data.content.accessToken);
       Cookies.set('refreshToken', rs.data.content.refreshToken);
+      Cookies.set('fullname', rs.data.content.full_name);
+      Cookies.set('avatar', rs.data.content.avatar);
+      Cookies.set('session', new Date(new Date().getTime() + 20 * 60000).getTime().toString());
+
+      //set session
+      dispatch({
+        type: 'set::session',
+        payload: true,
+      })
+
     } else if (rs.data.status == 400) {
       notifyWarn(rs.data.content.mess);
     }
