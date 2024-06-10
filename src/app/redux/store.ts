@@ -13,7 +13,10 @@ export const initialState = {
         customer: '',
         paymentType: '',
     },
-    session: false,
+    modalAuth: {
+        isOpen: true,
+    },
+
 }
 
 export interface State {
@@ -29,7 +32,9 @@ export interface State {
         customer: string,
         paymentType: string,
     },
-    session: boolean,
+    modalAuth: {
+        isOpen: boolean,
+    },
 }
 
 
@@ -91,6 +96,14 @@ const reducer = (state = initialState as State, { type, payload }: Action) => {
             return {
                 ...state,
                 session: payload
+            }
+        }
+        case 'set::modalAuth': {
+            return {
+                ...state,
+                modalAuth: {
+                    isOpen: payload
+                }
             }
         }
         default: {

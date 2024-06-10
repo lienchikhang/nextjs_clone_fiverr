@@ -6,7 +6,6 @@ import { IS_EMAIL } from "../libs/constants";
 import axios from "axios";
 import Cookies from 'js-cookie';
 import { notification } from "antd";
-import { NotificationPlacement } from "antd/es/notification/interface";
 import { ModalProps } from "./ModalAuth";
 import { Context } from "../redux";
 
@@ -48,18 +47,16 @@ const ModalStateLogin: React.FC<Props> = ({ updateState, closeModal, notifyWarn 
       //set cookie
       Cookies.set('accessToken', rs.data.content.accessToken);
       Cookies.set('refreshToken', rs.data.content.refreshToken);
-      Cookies.set('fullname', rs.data.content.full_name);
+      Cookies.set('fullname', rs.data.content.fullname);
       Cookies.set('avatar', rs.data.content.avatar);
-      Cookies.set('session', new Date(new Date().getTime() + 20 * 60000).getTime().toString());
 
-      //set session
+      //set modalAuth
       dispatch({
-        type: 'set::session',
-        payload: true,
-      })
+        type: 'set::modalAuth',
+        payload: false,
+      });
 
-    } else if (rs.data.status == 400) {
-      notifyWarn(rs.data.content.mess);
+      window.location.reload();
     }
 
     closeModal();

@@ -2,6 +2,7 @@ import http from "@/app/config/axios.config";
 import { ErrorResponse } from "@/app/interfaces/auth.interface";
 import { AxiosError } from "axios";
 import { NextApiRequest } from "next";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, res: NextResponse) {
@@ -10,7 +11,11 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
         const query = req.url.split('api/')[1];
 
-        let response = await http.get(query);
+        let response = await http.get(query, {
+            headers: {
+                'Authorization': `Bearer ${cookies().get('accessToken')?.value}`
+            }
+        });
 
         const res = NextResponse.json(response.data);
 
@@ -18,7 +23,19 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
     } catch (error) {
 
-        console.log({ error });
+        const err = error as AxiosError
+
+        console.log({ err })
+
+        if (err.response) {
+            const axiosErrorResponse = err.response.data as ErrorResponse;
+
+            if (axiosErrorResponse.mess == 'loginExpired') {
+                return NextResponse.json({
+                    loginExpired: true,
+                })
+            }
+        }
 
         return NextResponse.error();
     }

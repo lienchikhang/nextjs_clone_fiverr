@@ -114,7 +114,15 @@
                 &.disable {
                     background-color: #fafafa;
                 }
+
+                &.done {
+                    @apply bg-green-500/75 cursor-not-allowed;
+                }
             }
         }
+    }
+
+    .Toastify {
+        @apply absolute;
     }
 }

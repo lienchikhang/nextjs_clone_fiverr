@@ -89,6 +89,61 @@
             .jobs__loading {
                 @apply absolute top-0 left-0 flex justify-center items-center w-full h-full bg-black/10;
             }
+
+            .jobs {
+                .jobs__nothing {
+                    @apply flex items-center justify-between p-4 border rounded-md;
+
+                    p {
+                        @apply font-semibold;
+                    }
+
+                    button {
+                        @apply bg-green-500 text-white font-semibold px-6 py-2 rounded-md;
+                    }
+                }
+
+                .jobItem {
+                    @apply w-full flex p-4 gap-5 items-center border rounded-md mb-4;
+
+                    .jobItem__image {
+                        @apply block h-[150px] object-cover;
+                        width: 30% !important;
+                    }
+
+                    .jobItem__info {
+                        @apply flex-1;
+
+                        h2 {
+                            @apply font-semibold mb-4;
+                        }
+
+                        .review__wrapper {
+                            @apply flex items-center justify-between mb-4;
+
+                            .jobItem__review {
+                                @apply flex items-center gap-2;
+                            }
+                        }
+
+                        .jobItem__actions {
+                            @apply flex justify-end gap-5 items-center;
+
+                            button {
+                                @apply px-6 py-2 text-white font-semibold rounded-md;
+
+                                &:first-child {
+                                    @apply bg-green-500;
+                                }
+
+                                &:last-child {
+                                    @apply bg-red-500;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

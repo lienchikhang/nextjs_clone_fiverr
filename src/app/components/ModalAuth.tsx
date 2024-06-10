@@ -25,7 +25,12 @@ export interface ModalProps {
 
 const ModalAuth: React.FC<ModalProps> = ({ notifyWarn }) => {
   const [open, setOpen] = useState(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    dispatch({
+      type: 'set::modalAuth',
+      payload: false
+    })
+  };
   const [step, setStep] = useState(1);
   const [state, dispatch] = useContext(Context);
 
@@ -36,7 +41,7 @@ const ModalAuth: React.FC<ModalProps> = ({ notifyWarn }) => {
 
   return (
     <Modal
-      open={Cookies.get('session') ? false : true}
+      open={(!Cookies.get('accessToken') && state.modalAuth.isOpen) as boolean}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"

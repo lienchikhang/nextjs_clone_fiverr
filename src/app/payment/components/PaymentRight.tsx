@@ -2,15 +2,33 @@
 import { Context } from '@/app/redux';
 import { Skeleton } from '@mui/material';
 import Image from 'next/image';
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Payment, Test, VNPay } from '../classes/Payment';
+import Cookies from 'js-cookie';
+import { redirect } from 'next/navigation';
 
-const PaymentRight = () => {
+
+interface Props {
+    notifySuccess: (mess: string) => void;
+}
+
+const PaymentRight: React.FC<Props> = ({ notifySuccess }) => {
 
     const [state, dispatch] = useContext(Context);
+    const [isPaid, setIsPaid] = useState(false);
 
-    const handleConfirm = () => {
+    const handleConfirm = async () => {
         if (!state.infoOrder) return;
+
+        if (isPaid) return;
+
+        if (!Cookies.get('accessToken')) {
+            dispatch({
+                type: 'set::modalAuth',
+                payload: true,
+            })
+            return;
+        }
 
         const payment = new Payment(new Test());
 
@@ -21,10 +39,15 @@ const PaymentRight = () => {
 
         //make payment
         console.log(payment.getStrategy())
-        payment.make(state.infoOrder.id);
+        const rs = await payment.make(state.infoOrder.id);
+
+        console.log({ rs });
 
         //go back to home
-
+        if (rs.status == 200) {
+            setIsPaid(true);
+            notifySuccess('Paid successfully!');
+        }
     }
 
     return (
@@ -51,7 +74,7 @@ const PaymentRight = () => {
                     <p className='checkout__total'>Total</p>
                     {state.infoOrder ? <p>{(state.infoOrder.price * state.infoOrder.quantity).toLocaleString()}</p> : <p>1.450.000</p>}
                 </div>
-                <button className={`${state.infoOrder ? 'active' : 'disable'}`} onClick={handleConfirm}>Confirm & Pay</button>
+                <button className={`${state.infoOrder ? 'active' : 'disable'} ${isPaid ? 'done' : ''}`} onClick={handleConfirm}>{isPaid ? 'Thank you' : 'Confirm & Pay'}</button>
             </div>
         </div>
     )

@@ -51,7 +51,6 @@ const PaymentLeft = () => {
                             <p>Your invoice will be issued according to the details listed here.</p>
                             <button>Add details</button>
                         </div>
-                        <p>lien-chi-khang</p>
                     </div>
                 </div>
                 <div className="options">

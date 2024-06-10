@@ -15,7 +15,7 @@ export class Payment {
     }
 
     public async make(jobId: number) {
-        this.strategy.make(jobId);
+        return this.strategy.make(jobId);
     }
 
     public getStrategy() {
