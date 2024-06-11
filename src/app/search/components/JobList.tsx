@@ -57,19 +57,17 @@ const JobList = () => {
   const [jobs, setJobs] = useState<any[] | null>(null);
   const searchParams = useSearchParams();
 
-  // useEffect(() => {
-  //   http
-  //     .get(`/job/get-all?name=${searchParams.get('name')}`)
-  //     .then((res) => [
-  //       console.log(res.data),
-  //       setJobs(res.data.content.data),
-  //       setPage(res.data.content.page)
-  //     ])
-  // }, []);
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    console.log('Page changed to: ', value);
+    // Thực hiện các hành động khác như tải dữ liệu mới từ server khi chuyển trang
+  };
 
-  const { data, error, isLoading } = useSWR(`/api/job/get-all?name=${searchParams.get('name')}`, fetcher, {
+  const { data, error, isLoading } = useSWR(`/api/job/get-all?name=${searchParams.get('name')}&page=${page}`, fetcher, {
     revalidateOnReconnect: true,
   });
+
+  console.log({ data })
 
   if (isLoading) {
     return <section className="jobList__wrapper">
@@ -103,15 +101,17 @@ const JobList = () => {
 
   return (
     <section className="jobList__wrapper">
-      <div className="jobList">
-        {data && data?.content?.data.map((job: IJob, idx: number) => {
+      {data?.content?.data.length != 0 ? <div className="jobList">
+        {data?.content?.data.map((job: IJob, idx: number) => {
           return <JobItem data={job} key={idx} />;
         })}
-      </div>
+      </div> : <div className="jobList__notfound">
+        <h1>Không tìm thấy kết quả phù hợp</h1>
+      </div>}
       <div className="jobList__pages">
-        <Stack spacing={2}>
-          <Pagination count={data && data?.content?.page} variant="text" size="large" />
-        </Stack>
+        {data && data?.content?.page != 0 && <Stack spacing={2}>
+          <Pagination count={data?.content?.page} variant="text" size="large" onChange={handleChange} />
+        </Stack>}
       </div>
     </section>
   );

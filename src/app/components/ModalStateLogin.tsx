@@ -47,7 +47,7 @@ const ModalStateLogin: React.FC<Props> = ({ updateState, closeModal, notifyWarn 
       //set cookie
       Cookies.set('accessToken', rs.data.content.accessToken);
       Cookies.set('refreshToken', rs.data.content.refreshToken);
-      Cookies.set('fullname', rs.data.content.fullname);
+      Cookies.set('fullname', rs.data.content.full_name);
       Cookies.set('avatar', rs.data.content.avatar);
 
       //set modalAuth

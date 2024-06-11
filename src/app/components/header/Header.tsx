@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import "../../styles/header.scss";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import SearchBar from "../SearchBar";
 import { Context } from "../../redux";
 import HeaderLogo from "./HeaderLogo";
@@ -15,6 +15,8 @@ const Header = () => {
   const router = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(false);
+
+  const route = useRouter();
 
 
   const handleScroll = () => {
@@ -62,7 +64,7 @@ const Header = () => {
           <section className="header__menu" onClick={() => setIsOpen(true)}>
             <MenuIcon />
           </section>
-          <section className="header__logo">
+          <section className="header__logo" onClick={() => route.push('/')}>
             <HeaderLogo showNavbar={showNavbar} />
           </section>
           <MenuDrawer isOpen={isOpen} toggleDrawer={toggleDrawer} />

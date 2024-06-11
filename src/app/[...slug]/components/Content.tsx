@@ -16,6 +16,7 @@ import useSWR from "swr";
 import StarIcon from "@mui/icons-material/Star";
 import CommentSection from "./CommentSection";
 import DrawerComfirm from "./DrawerComfirm";
+import Image from "next/image";
 
 const fetcher = (path: string) => fetch(path).then((res) => res.json());
 
@@ -126,7 +127,6 @@ const Content = () => {
               sx={{ width: 100, height: 100 }}
             /> : <Avatar
               alt="Remy Sharp"
-              src={IDataJob.content.data.image && IDataJob.content.data.image}
               sx={{ width: 100, height: 100 }}
             >
               {IDataJob.content.data.Users.full_name[0]}
@@ -161,6 +161,9 @@ const Content = () => {
             <Skeleton animation="wave" />
           </Box>
         )}
+
+        {IDataJob && IDataJob.content.data.image && <Image className="mb-6 object-cover rounded-md" src={IDataJob.content.data.image} alt="image" width={500} height={300} />}
+
         <ul className="detailJob__skill">
           <li>JavaScript</li>
           <li>Python</li>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import NavItemSelect from '../NavItemSelect'
 import NavItem from '../NavItem'
 // import { LanguageIcon } from '@heroicons/react/24/solid';
@@ -8,6 +8,7 @@ import MessageIcon from './MessageIcon';
 import { Avatar, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from '@mui/material';
 import { Logout, Settings } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
+import { Context } from '@/app/redux';
 
 interface Props {
     showNavbar: boolean,
@@ -19,6 +20,7 @@ const HeaderNav: React.FC<Props> = ({ showNavbar }) => {
     const [fullname, setFullname] = useState<string | null>(null);
     const [avatar, setAvatar] = useState<string | null>(null);
     const router = useRouter();
+    const [state, dispatch] = useContext(Context);
     const open = Boolean(anchorEl);
 
     useEffect(() => {
@@ -38,6 +40,14 @@ const HeaderNav: React.FC<Props> = ({ showNavbar }) => {
         router.push(`/profile/${fullname}`)
         handleClose();
     }
+
+    const handleOpenModalAuth = () => {
+        dispatch({
+            type: 'set::modalAuth',
+            payload: true,
+        })
+    }
+
 
     const handleLogout = () => {
         cookies.remove('fullname');
@@ -62,11 +72,11 @@ const HeaderNav: React.FC<Props> = ({ showNavbar }) => {
             <li className="nav__item">
                 <NavItem text="Become a seller" link="/seller" />
             </li>
-            <li className="nav__item">
-                <NavItem text="Sign in" link="/auth/login" />
+            <li className="nav__item" onClick={handleOpenModalAuth}>
+                <NavItem text="Sign in" link="#" />
             </li>
-            <li className={`nav__item ${showNavbar ? "scrolled" : ""}`}>
-                <NavItem text="Join" link="/auth/login" />
+            <li className={`nav__item ${showNavbar ? "scrolled" : ""}`} onClick={handleOpenModalAuth}>
+                <NavItem text="Join" link="#" />
             </li>
         </ul> : <ul className="header__nav">
             <li className="nav__item">
